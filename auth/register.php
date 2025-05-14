@@ -34,64 +34,135 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Please fill out all fields.";
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eef2f3;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            color: #fff;
         }
+
         .container {
-            background: #fff;
-            padding: 30px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: #fff;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 100%;
-            max-width: 400px;
+            transition: all 0.3s ease-in-out;
         }
-        form input {
+
+        .container:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .auth-form input {
             width: 100%;
-            padding: 12px;
-            margin: 12px 0;
+            padding: 15px;
+            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
-        form button {
-            padding: 12px;
+
+        .auth-form input:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        .auth-form input[type="email"],
+        .auth-form input[type="password"] {
+            background-color: #f9f9f9;
+        }
+
+        .auth-form button {
+            padding: 14px;
             width: 100%;
-            border: none;
-            background-color: #34a853;
+            background-color: #2575fc;
             color: white;
             font-size: 16px;
             border-radius: 6px;
+            border: none;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        form button:hover {
-            background-color: #2c8e47;
+
+        .auth-form button:hover {
+            background-color: #1d63d7;
         }
+
+        .auth-form button:focus {
+            outline: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
         a {
-            color: #4285f4;
+            color: #2575fc;
             text-decoration: none;
+            font-weight: bold;
         }
+
         a:hover {
             text-decoration: underline;
         }
-        .error {
-            color: red;
-            margin-bottom: 10px;
+
+        p {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+                max-width: 90%;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -104,14 +175,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="error"><?= htmlspecialchars($error); ?></div>
     <?php endif; ?>
 
-    <form method="POST">
+    <form method="POST" class="auth-form">
         <input type="text" name="username" placeholder="Username" value="<?= htmlspecialchars($username); ?>" required />
         <input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($email); ?>" required />
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Register</button>
     </form>
+    
     <p>Already have an account? <a href="login.php">Login here</a></p>
 </div>
+
+<footer>
+    <p>&copy; <?= date("Y"); ?> Your Website. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
