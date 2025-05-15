@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $conn->real_escape_string($_POST['email']);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        // Check if username or email already exists
-        $check_sql = "SELECT id FROM users WHERE username = '$username' OR email = '$email'";
+        // Check if email already exists
+        $check_sql = "SELECT id FROM users WHERE email = '$email'";
         $result = $conn->query($check_sql);
 
         if ($result && $result->num_rows > 0) {
-            $error = "Username or email already exists.";
+            $error = "Email already exists.";
         } else {
             $sql = "INSERT INTO users (username, email, password) 
                     VALUES ('$username', '$email', '$password')";
@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Please fill out all fields.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
